@@ -8,13 +8,12 @@ use GildedRose\ItemQualityOutOfRangeException;
 
 class ItemQuality{
     
-    private const int MAX_VALUE = 50;
-    private const int MIN_VALUE = 0;
+    private const MAX_VALUE = 100;
+    private const MIN_VALUE = 0;
 
     private int $value;
 
-    // function __construct (int $value) throws ItemQualityOutOfRangeException {
-    function __construct (int $value) {
+    function __construct (int $value)  {
         if ($value < self::MIN_VALUE || $value > self::MAX_VALUE) {
             throw new ItemQualityOutOfRangeException( $value );
         }
@@ -39,5 +38,9 @@ class ItemQuality{
 
     function reset():ItemQuality {
         return new ItemQuality(self::MIN_VALUE);
+    }
+
+    function get():int{
+        return $this->value;
     }
 }

@@ -21,4 +21,7 @@ class ItemSellIn {
         return $this->value < $days;
     }
 
+    function get():int{
+        return $this->value;
+    }
 }

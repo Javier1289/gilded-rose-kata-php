@@ -6,21 +6,24 @@ namespace GildedRose;
 
 class AgedBrie extends Item {
     
+    private const DOUBLE_QUALITY_DECREMENT_SELL_IN_THRESHOLD = 0;
     
-    public function __construct(String $name,  int $sellIn, int $quality ) {
-        parent::__construct( $name, $sellIn, $quality );
+    public function __construct(
+        ItemName $itemName,  
+        ItemSellIn $itemSellIn, 
+        ItemQuality $itemQuality
+     ) {
+        parent::__construct( $itemName, $itemSellIn, $itemQuality );
     }
 
     public function update(){
    
-        if ($this->quality < 50) {
-            $this->quality = $this->quality + 1;
-        }
-        $this->sellIn = $this->sellIn - 1;
-        if ($this->sellIn < 0) {
-            if ($this->quality < 50) {
-                $this->quality = $this->quality + 1;
-            }
+        $this->decreaseSellIn();
+
+        $this->increaseQuality();
+
+        if ($this->hasToBeSoldInLessThan( self::DOUBLE_QUALITY_DECREMENT_SELL_IN_THRESHOLD )) {
+            $this->increaseQuality();
         }
 
     }

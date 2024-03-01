@@ -6,9 +6,9 @@ namespace GildedRose;
 
 class ItemName{
 
-    private const String AGED_BRIE = "Aged Brie";
-    private const String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    private const String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    private const AGED_BRIE = "Aged Brie";
+    private const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+    private const SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     private String $value;
 
@@ -26,6 +26,10 @@ class ItemName{
 
     function isSulfuras(): bool {
         return self::SULFURAS === $this->value;
-    }    
+    }
+    
+    function get():string{
+        return $this->value;
+    }
 
 }

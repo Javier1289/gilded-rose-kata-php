@@ -6,22 +6,23 @@ namespace GildedRose;
 
 class StandardItem extends Item{
     
-    public function __construct(String $name,  int $sellIn, int $quality ) {
-        parent::__construct( $name, $sellIn, $quality );
+    private const DOUBLE_QUALITY_DECREASE_SELL_IN_THRESHOLD = 0;
+
+    public function __construct(
+        ItemName $itemName,  
+        ItemSellIn $itemSellIn, 
+        ItemQuality $itemQuality
+     ) {
+        parent::__construct( $itemName, $itemSellIn, $itemQuality );
     }
 
     public function update(){
 
-        if ($this->quality > 0) {
-            $this->quality = $this->quality - 1;
-        }
+        $this->decreaseSellIn();
+        $this->decreaseQuality();
 
-        $this->sellIn = $this->sellIn - 1;
-
-        if ($this->sellIn < 0) {
-            if ($this->quality > 0) {
-                $this->quality = $this->quality - 1;
-            }
+        if ($this->hasToBeSoldInLessThan(self::DOUBLE_QUALITY_DECREASE_SELL_IN_THRESHOLD)) {
+            $this->decreaseQuality();
         }
 
     }
